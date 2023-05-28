@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCC Getway</title>
+    <link rel="shortcut icon" href="https://api.iconify.design/material-symbols/camera-outline.svg" type="image/x-icon">
+    <script>
+        function handleKeyDown(event) {
+            if (event.key === 'a') {
+                document.getElementById('left').classList.add('active');
+            }
+            if (event.key === 'w') {
+                document.getElementById('up').classList.add('active');
+            }
+            if (event.key === 'd') {
+                document.getElementById('right').classList.add('active');
+            }
+            if (event.key === 's') {
+                document.getElementById('down').classList.add('active');
+            }
+        }
+
+        function handleKeyUp(event) {
+            if (event.key === 'a') {
+                document.getElementById('left').classList.remove('active');
+            }
+            if (event.key === 'w') {
+                document.getElementById('up').classList.remove('active');
+            }
+            if (event.key === 'd') {
+                document.getElementById('right').classList.remove('active');
+            }
+            if (event.key === 's') {
+                document.getElementById('down').classList.remove('active');
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #bfbfbf;
+            text-align: center;
+        }
+
+        button {
+            border-radius: 10%;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:active {
+            background-color: #1e5631;
+        }
+
+        .button {
+            background-color: #4CAF50;
+        }
+
+        .active {
+            background-color: #1e5631;
+        }
+
+        img {
+            width: 800px;
+            height: 450px;
+            padding: 10px;
+        }
+
+        .slidecontainer {
+            width: 400px;
+            height: 50px;
+        }
+
+        .slider {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body align="center" onkeydown="handleKeyDown(event)" onkeyup="handleKeyUp(event)">
+    <table id="mainTable" align="center">
+        <tr>
+            <img id="cameraImage"
+                src="https://media.istockphoto.com/id/902487808/photo/empty-brick-floor-with-city-skyline-background.jpg?s=612x612&w=0&k=20&c=6g3BrxnkWWcqjepibF9LBKK5yMNle1aBYD70WHPDW0s=">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-right: 50px;">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td><button id="up" class="button" ontouchstart='sendButtonInput("MoveCar","1")'
+                                ontouchend='sendButtonInput("MoveCar","0")'><svg width="55" height="55"
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M8.12 14.71L12 10.83l3.88 3.88a.996.996 0 1 0 1.41-1.41L12.7 8.71a.996.996 0 0 0-1.41 0L6.7 13.3a.996.996 0 0 0 0 1.41c.39.38 1.03.39 1.42 0z" />
+                                </svg></button></td>
+                    </tr>
+                    <tr>
+                        <td><button id="left" class="button" ontouchstart='sendButtonInput("MoveCar","3")'
+                                ontouchend='sendButtonInput("MoveCar","0")'><svg width="55" height="55"
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z" />
+                                </svg></button></td>
+                        <td></td>
+                        <td><button id="right" class="button" ontouchstart='sendButtonInput("MoveCar","4")'
+                                ontouchend='sendButtonInput("MoveCar","0")'><svg width="55" height="55"
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M9.29 15.88L13.17 12L9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z" />
+                                </svg></button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button id="down" class="button" ontouchstart='sendButtonInput("MoveCar","2")'
+                                ontouchend='sendButtonInput("MoveCar","0")'><svg width="55" height="55"
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M8.12 9.29L12 13.17l3.88-3.88a.996.996 0 1 1 1.41 1.41l-4.59 4.59a.996.996 0 0 1-1.41 0L6.7 10.7a.996.996 0 0 1 0-1.41c.39-.38 1.03-.39 1.42 0z" />
+                                </svg></button></td>
+                    </tr>
+                </table>
+            </td>
+            <td style="padding-left: 50px;">
+                <table>
+                    <tr>
+                        <td style="padding-bottom: 30px;"><b>Speed:</b></td>
+                        <td colspan=2>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value="150" class="slider" id="Speed"
+                                    oninput='sendButtonInput("Speed",value), SpeedValue()'>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="SpeedValue" style="padding-bottom: 30px;"></div>
+                            <script>
+                                function SpeedValue() {
+                                    var w = document.getElementById("Speed").value;
+                                    document.getElementById("SpeedValue").innerHTML = w + '%';
+                                }
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 30px;"><b>Light:</b></td>
+                        <td colspan=2>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value="0" class="slider" id="Light"
+                                    oninput='sendButtonInput("Light",value),LightValue()'>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="LightValue" style="padding-bottom: 30px;"></div>
+                            <script>
+                                function LightValue() {
+                                    var x = document.getElementById("Light").value;
+                                    document.getElementById("LightValue").innerHTML = x + '%';
+                                }
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 30px;"><b>Up-Down:</b></td>
+                        <td colspan=2>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="180" value="90" class="slider" id="Pan"
+                                    oninput='sendButtonInput("Pan",value),panValue()'>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="PanValue" style="padding-bottom: 30px;"></div>
+                            <script>
+                                function panValue() {
+                                    var y = document.getElementById("Pan").value;
+                                    document.getElementById("PanValue").innerHTML = y + 'º';
+                                }
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 30px;"><b>Left-Right:</b></td>
+                        <td colspan=2>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="180" value="90" class="slider" id="Tilt"
+                                    oninput='sendButtonInput("Tilt",value), tiltValue()'>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="tiltValue" style="padding-bottom: 30px;"></div>
+                            <script>
+                                function tiltValue() {
+                                    var z = document.getElementById("Tilt").value;
+                                    document.getElementById("tiltValue").innerHTML = z + 'º';
+                                }
+                            </script>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        var webSocketCameraUrl = "ws:\/\/" + window.location.hostname + "/Camera";
+        var webSocketCarInputUrl = "ws:\/\/" + window.location.hostname + "/CarInput";
+        var websocketCamera;
+        var websocketCarInput;
+
+        function initCameraWebSocket() {
+            websocketCamera = new WebSocket(webSocketCameraUrl);
+            websocketCamera.binaryType = 'blob';
+            websocketCamera.onopen = function (event) { };
+            websocketCamera.onclose = function (event) { setTimeout(initCameraWebSocket, 2000); };
+            websocketCamera.onmessage = function (event) {
+                var imageId = document.getElementById("cameraImage");
+                imageId.src = URL.createObjectURL(event.data);
+            };
+        }
+
+        function initCarInputWebSocket() {
+            websocketCarInput = new WebSocket(webSocketCarInputUrl);
+            websocketCarInput.onopen = function (event) {
+                sendButtonInput("Speed", document.getElementById("Speed").value);
+                sendButtonInput("Light", document.getElementById("Light").value);
+                sendButtonInput("Pan", document.getElementById("Pan").value);
+                sendButtonInput("Tilt", document.getElementById("Tilt").value);
+            };
+            websocketCarInput.onclose = function (event) { setTimeout(initCarInputWebSocket, 2000); };
+            websocketCarInput.onmessage = function (event) { };
+        }
+
+        function initWebSocket() {
+            initCameraWebSocket();
+            initCarInputWebSocket();
+        }
+
+        function sendButtonInput(key, value) {
+            var data = key + "," + value;
+            websocketCarInput.send(data);
+        }
+
+        window.onload = initWebSocket;
+        document.getElementById("mainTable").addEventListener("touchend", function (event) {
+            event.preventDefault()
+        });      
+    </script>
+</body>
+
+</html>
