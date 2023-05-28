@@ -11,15 +11,19 @@
         function handleKeyDown(event) {
             if (event.key === 'a') {
                 document.getElementById('left').classList.add('active');
+                document.getElementById('left').click();
             }
             if (event.key === 'w') {
                 document.getElementById('up').classList.add('active');
+                document.getElementById('up').click();
             }
             if (event.key === 'd') {
                 document.getElementById('right').classList.add('active');
+                document.getElementById('right').click();
             }
             if (event.key === 's') {
                 document.getElementById('down').classList.add('active');
+                document.getElementById('down').click();
             }
         }
 
